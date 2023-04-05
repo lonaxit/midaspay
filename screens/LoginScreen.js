@@ -1,13 +1,19 @@
-import React from 'react'
+import React, {  useState } from 'react'
 import { SafeAreaView, StyleSheet, TextInput, TouchableOpacity, useWindowDimensions } from 'react-native'
 import { Image, Text, View } from 'react-native'
 import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import { useAuth } from '../Context/AuthContext';
 
 
 const LoginScreen = () => {
   const { height } = useWindowDimensions()
   const navigation = useNavigation()
+  const { test } = useAuth()
+
+  const [username, setUsername] = useState(null)
+  const [password, setPassword] = useState(null)
+  
   return (
     <SafeAreaView style={{flex:1,backgroundColor:'#f9fbfc'}}>
       <View style={{alignItems:'center', marginTop:50}}>
@@ -28,18 +34,30 @@ const LoginScreen = () => {
 
       <View style={styles.inputContainer}>
         <AntDesign name="user" size={20} color="#666"  style={styles.iconStyle}/>
-          <TextInput placeholder='Enter username' style={{padding:10}}/>
+          <TextInput
+            placeholder='Enter username'
+            style={{ padding: 10,flex:1 }}
+            value={username}
+            onChangeText={text => setUsername(text)}
+         
+          />
       </View>
 
         <View style={styles.inputContainer}>
          <AntDesign name="lock" size={20} color="#666" style={styles.iconStyle}/>
-          <TextInput placeholder='Enter password' secureTextEntry={true} style={{ padding: 10, flex:1 }} />
+          <TextInput
+            placeholder='Enter password'
+            secureTextEntry={true}
+            style={{ padding: 10, flex: 1 }}
+            value={password}
+            onChangeText={text => setPassword(text)}
+          />
           <TouchableOpacity onPress={()=>{}}>
             <Text style={{color:'#af3015'}}>Change?</Text>
           </TouchableOpacity>
       </View>
         
-        <TouchableOpacity onPress={() => { }} style={{
+        <TouchableOpacity onPress={() => {login(username,password)}} style={{
             backgroundColor: '#af3015',
             padding: 20,
             borderRadius: 10,
@@ -60,6 +78,9 @@ const LoginScreen = () => {
           <Text style={{fontFamily:'nunito-mediumItalic', fontSize:14, color:'#363130',textAlign:'center'}}>Apply for membership</Text>
           </TouchableOpacity>
         </View>
+        <Text>{test}</Text>
+        
+
 
       </View>
 
