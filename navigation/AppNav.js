@@ -9,15 +9,15 @@ import { ActivityIndicator, View } from 'react-native';
 
 
 const AppNav = () => {
-  // const { isLoading, token } = useAuth()
+  const { isLoading, token } = useAuth()
 
-  // if (isLoading) {
-  //   return (
-  //     <View style={{flex:1, justifyContent:'center',alignItems:'center'}}>
-  //       <ActivityIndicator size={'large'} />
-  //   </View>
-  //   )
-  // }
+  if (isLoading) {
+    return (
+      <View style={{flex:1, justifyContent:'center',alignItems:'center'}}>
+        <ActivityIndicator size={'large'} />
+    </View>
+    )
+  }
 
 
   return (
