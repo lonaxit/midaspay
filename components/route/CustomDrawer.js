@@ -4,7 +4,6 @@ import {DrawerContentScrollView, DrawerItemList} from '@react-navigation/drawer'
 import { Ionicons } from '@expo/vector-icons';
 import { useAuth } from '../../Context/AuthContext';
 
-
 const CustomDrawer = (props) => {
 // const { logout } = useAuth()
     
