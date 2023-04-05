@@ -8,7 +8,7 @@ const OnboardingScreen = ({navigation}) => {
     <SafeAreaView style={styles.parentContainer}>
 
     <View style={{marginTop:50}}>
-      <Text style={styles.namePlate}>MIDASgo</Text>
+      <Text style={styles.namePlate}>MIDAS-Mobile</Text>
      
     </View>
 
