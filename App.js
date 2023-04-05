@@ -6,14 +6,14 @@ import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 
-import { NavigationContainer } from '@react-navigation/native';
-import HomeStack from './navigation/HomeStack';
-import AuthStack from './navigation/AuthStack';
+import { AuthProvider } from './Context/AuthContext';
+import AppNav from './navigation/AppNav';
 
 
 
 
 export default function App() {
+ 
 
     const [fontsLoaded] = useFonts({
     'nunito-regular': require('./assets/fonts/Nunito-Regular.ttf'),
@@ -38,13 +38,12 @@ export default function App() {
     SplashScreen.hideAsync()
   }
 
+  // Authentication, if user logged in HomeStack is shown else show AuthStack
   return (
-  
-    <NavigationContainer>
-    <StatusBar backgroundColor="#ffffff"/>
-    {/* <HomeStack/> */}
-    <AuthStack/>
-   </NavigationContainer>
+  <AuthProvider>
+   <AppNav/>
+  </AuthProvider>
+   
    
   );
 }
