@@ -12,17 +12,16 @@ import { useAuthentication } from '../Context/Authentication';
 const AppNav = () => {
   // const { isLoading, token } = useAuth()
 
-  const { isLoading, authtoken,authenticated } = useAuthentication()
+  const { authenticated } = useAuthentication()
 
-  // if (isLoading) {
-  //   return (
-  //     <View style={{flex:1, justifyContent:'center',alignItems:'center'}}>
-  //       <ActivityIndicator size={'large'} />
-  //   </View>
-  //   )
-  // }
-
-
+  if (!authenticated) {
+    return (
+      <View style={{flex:1, justifyContent:'center',alignItems:'center'}}>
+        <ActivityIndicator size={'large'} />
+    </View>
+    )
+  }
+  
   return (
     // <NavigationContainer>
     //   { token !==null ? <HomeStack/> : <AuthStack/> }
