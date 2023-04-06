@@ -15,7 +15,7 @@ import WelcomeHeader from '../common/headers/welcome/welcomeHeader';
 
 
 const Welcome = () => {
-    const [balance, setBalance] = useState(25814)
+    
   
 
     // For loan card
