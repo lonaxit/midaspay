@@ -22,7 +22,8 @@ const OnboardingScreen = ({navigation}) => {
     <TouchableOpacity style={styles.welcomeBtn} onPress={()=>navigation.navigate('Login')}>
       <Text style={styles.welcomeBtnText}>Let's Begin</Text>
       <MaterialIcons name="keyboard-arrow-right" size={24} color="black" /> 
-    </TouchableOpacity>
+      </TouchableOpacity>
+    
     
   </SafeAreaView>
   )
