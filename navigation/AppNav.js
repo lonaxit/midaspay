@@ -3,26 +3,33 @@ import { NavigationContainer } from '@react-navigation/native';
 import HomeStack from './HomeStack';
 import AuthStack from './AuthStack';
 
-import { useAuth } from '../Context/AuthContext';
+// import { useAuth } from '../Context/AuthContext';
 import { ActivityIndicator, View } from 'react-native';
+import { useAuthentication } from '../Context/Authentication';
 
 
 
 const AppNav = () => {
-  const { isLoading, token } = useAuth()
+  // const { isLoading, token } = useAuth()
 
-  if (isLoading) {
-    return (
-      <View style={{flex:1, justifyContent:'center',alignItems:'center'}}>
-        <ActivityIndicator size={'large'} />
-    </View>
-    )
-  }
+  const { isLoading, authtoken,authenticated } = useAuthentication()
+
+  // if (isLoading) {
+  //   return (
+  //     <View style={{flex:1, justifyContent:'center',alignItems:'center'}}>
+  //       <ActivityIndicator size={'large'} />
+  //   </View>
+  //   )
+  // }
 
 
   return (
+    // <NavigationContainer>
+    //   { token !==null ? <HomeStack/> : <AuthStack/> }
+    // </NavigationContainer>
+
     <NavigationContainer>
-      { token !==null ? <HomeStack/> : <AuthStack/> }
+      { authenticated ? <HomeStack/> : <AuthStack/> }
     </NavigationContainer>
   )
 }
