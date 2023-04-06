@@ -2,14 +2,14 @@ import { useNavigation } from '@react-navigation/native'
 import React from 'react'
 import { ImageBackground, TouchableOpacity } from 'react-native'
 import { Text, View } from 'react-native'
-import { useAuth } from '../../../../Context/AuthContext'
+import { useAuthentication } from '../../../../Context/Authentication'
 import styles from './welcomeheader.style'
 
-useAuth
 
 
 const WelcomeHeader = () => {
   const navigation = useNavigation()
+  const { userData } = useAuthentication()
 
   return (
     <View style={styles.welcomeHeader}>
