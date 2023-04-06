@@ -6,8 +6,10 @@ import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 
-import { AuthProvider } from './Context/AuthContext';
+// import { AuthProvider } from './Context/AuthContext';
+
 import AppNav from './navigation/AppNav';
+import { AuthenticationProvider } from './Context/Authentication';
 
 
 
@@ -40,9 +42,13 @@ export default function App() {
 
   // Authentication, if user logged in HomeStack is shown else show AuthStack
   return (
-  <AuthProvider>
-   <AppNav/>
-  </AuthProvider>
+  // <AuthProvider>
+  //  <AppNav/>
+  //  </AuthProvider>
+    
+    <AuthenticationProvider>
+    <AppNav/>
+   </AuthenticationProvider>
    
    
   );
