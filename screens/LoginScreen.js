@@ -3,16 +3,44 @@ import { SafeAreaView, StyleSheet, TextInput, TouchableOpacity, useWindowDimensi
 import { Image, Text, View } from 'react-native'
 import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import { useAuth } from '../Context/AuthContext';
+import { useAuthentication } from '../Context/Authentication';
+// import { useAuth } from '../Context/AuthContext';
+
 
 
 const LoginScreen = () => {
   const { height } = useWindowDimensions()
   const navigation = useNavigation()
-  const { test } = useAuth()
+
+// const { test } = useAuth()
+  
+  
+  const { login } = useAuthentication()
 
   const [username, setUsername] = useState(null)
   const [password, setPassword] = useState(null)
+
+  // 
+  // const signin = async () => {
+
+  //   const res = await login(username, password)
+  //   if (res && res.error) {
+  //     alert(`something went wrong`)
+  //   } 
+
+  // }
+  const signin = async () => {
+    try {
+      const res = await login(username, password);
+      if (res && res.error) {
+        throw new Error('Something went wrong');
+      }
+      // handle success scenario
+    } catch (error) {
+      console.log(`Error occurred: ${error.message}`);
+      alert('Something went wrong');
+    }
+  };
   
   return (
     <SafeAreaView style={{flex:1,backgroundColor:'#f9fbfc'}}>
@@ -57,7 +85,7 @@ const LoginScreen = () => {
           </TouchableOpacity>
       </View>
         
-        <TouchableOpacity onPress={() => {login(username,password)}} style={{
+        <TouchableOpacity onPress={signin} style={{
             backgroundColor: '#af3015',
             padding: 20,
             borderRadius: 10,
@@ -78,7 +106,8 @@ const LoginScreen = () => {
           <Text style={{fontFamily:'nunito-mediumItalic', fontSize:14, color:'#363130',textAlign:'center'}}>Apply for membership</Text>
           </TouchableOpacity>
         </View>
-        <Text>{test}</Text>
+        <Text>{username}</Text>
+        <Text>{password}</Text>
         
 
 
