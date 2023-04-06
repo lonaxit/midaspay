@@ -24,23 +24,22 @@ export const AuthenticationProvider = ({ children }) => {
     //login
     const login = async (username, password) => {
         // setIsLoading(true)
-        try {
-        const result = await axios.post(`${BASE_URL_APP}/token/login/`,{username,password
+      try {
+          
+        const result = await axios.post(`${BASE_URL_APP}/token/login/`,{username,  password
         })
            
             const auth_Token = result.data.auth_token;
             
             setAuthToken(auth_Token)
             
-            
+            setAuthenticated(true)
+        
             axios.defaults.headers.common['Authorization'] = `Token ${result.data.auth_token}`
             
-            console.log(authtoken)
+          
             //set item in async store
             await SecureStore.setItemAsync('MY_TOKEN', result.data.auth_token)
-
-            setAuthenticated(true)
-            // setIsLoading(false)
          
             return result
             
@@ -65,10 +64,22 @@ export const AuthenticationProvider = ({ children }) => {
         //reset state
         setAuthToken(null)
         setAuthenticated(false)
-        // setIsLoading(false)
-        // setUserData(null);
 
+  }
+
+  const fetchUserData = async () => {
+    try {
+      const result = await axios.get(`${BASE_URL_AUTH}/me`)
+         
+      setUserData(result.data.user);
+      console.log('hhhhhhhhh=======mmmmmmmm')
+      console.log(userData)
+      
+    } catch (error) {
+      console.log(error);
     }
+  };
+  
 
     // create useEffect
     useEffect(() => {
@@ -104,28 +115,24 @@ export const AuthenticationProvider = ({ children }) => {
       // useEffect(() => {
       //   const fetchUserData = async () => {
       //     try {
-      //       const result = await axios.post(`${BASE_URL_APP}/me`,{
-      //                       headers: {
-      //                       Authorization: `Token ${authtoken}`,
-      //                       },
-      //                       })
+      //       const result = await axios.get(`${BASE_URL_AUTH}/me`)
                
-      //        setUserData(result.data);
+      //       setUserData(result.data.user);
             
       //     } catch (error) {
       //       console.log(error);
       //     }
       //   };
     
-      //   if (authtoken) {
+      //   if (authenticated) {
       //     fetchUserData();
       //   }
-      // }, [authtoken]);
+      // }, [authenticated]);
 
 
 
     //values for use in authprovider
-    const value = { authenticated, userData,isLoading, authtoken, login, logout }
+    const value = { authenticated, userData,isLoading, authtoken, login, logout,fetchUserData }
     
     return (
         <AuthenticationContext.Provider value={value}>
