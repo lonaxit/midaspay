@@ -9,9 +9,12 @@ import { View } from 'react-native'
 // import { useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import styles from './homeloancard.style'
+import { useAuthentication } from '../../../../Context/Authentication';
 
 const HomeLoanCard = () => {
-    const [balance, setBalance] = useState(2001258)
+  const [balance, setBalance] = useState(2001258)
+
+  
   return (
     <TouchableOpacity >
     <LinearGradient
@@ -30,7 +33,8 @@ const HomeLoanCard = () => {
         </View>
 
         <View>
-            <Text style={styles.lightText}>Remaining on your loan ledger</Text>
+          <Text style={styles.lightText}>Remaining on your loan ledger</Text>
+      
             </View>
             
       </LinearGradient>
