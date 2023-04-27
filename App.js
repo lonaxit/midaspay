@@ -8,9 +8,6 @@ import { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import MidasHomeStack from './navigation/MidasHomeStack';
 
-
-// import { AuthProvider } from './Context/AuthContext';
-
 //working from old branch
 import AppNav from './navigation/AppNav';
 import { AuthenticationProvider } from './Context/Authentication';
