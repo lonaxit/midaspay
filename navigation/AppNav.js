@@ -7,14 +7,14 @@ import AuthStack from './AuthStack';
 import { ActivityIndicator, View } from 'react-native';
 import { useAuthentication } from '../Context/Authentication';
 import MidasHomeStack from './MidasHomeStack';
-import { useMaxAuth } from '../Context/MaxAuthContext';
+
 
 
 const AppNav = () => {
-  // const { isLoading, token } = useAuth()
 
 
-  const { authtoken ,authenticated} = useAuthentication()
+
+
 
   // if (!authenticated) {
   //   return (
@@ -31,7 +31,7 @@ const AppNav = () => {
 
 
     <NavigationContainer>
-      { authtoken !==null ? <MidasHomeStack/> : <AuthStack/> } 
+      <MidasHomeStack/>
     </NavigationContainer>
   )
 }

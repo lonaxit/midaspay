@@ -3,28 +3,17 @@ import { Alert, SafeAreaView, StyleSheet, TextInput, TouchableOpacity, useWindow
 import { Image, Text, View } from 'react-native'
 import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import { useAuthentication } from '../Context/Authentication';
+
 
 
 const LoginScreen = () => {
   const { height } = useWindowDimensions()
   const navigation = useNavigation()
-  const { login } = useAuthentication()
+
   const [username, setUsername] = useState(null)
   const [password, setPassword] = useState(null)
 
-  const signin = async (username,password) => {
-    //setIsAuthenticating(true) 
-    try {
-      const res = await login(username, password);
-  
-    } catch (error) {
-      console.log(error)
-      Alert.alert('Authehntication Failed','Could not log you in please check your credentials');
-    }
-    // setIsAuthenticating(false)
-  };
-  
+
   return (
     <SafeAreaView style={{flex:1,backgroundColor:'#f9fbfc'}}>
       <View style={{alignItems:'center', marginTop:50}}>
@@ -68,7 +57,7 @@ const LoginScreen = () => {
           </TouchableOpacity>
       </View>
         
-        <TouchableOpacity onPress={signin} style={{
+        <TouchableOpacity onPress={()=>{}} style={{
             backgroundColor: '#af3015',
             padding: 20,
             borderRadius: 10,
@@ -89,18 +78,7 @@ const LoginScreen = () => {
           <Text style={{fontFamily:'nunito-mediumItalic', fontSize:14, color:'#363130',textAlign:'center'}}>Apply for membership</Text>
           </TouchableOpacity>
         </View>
-       
-        
-
-
       </View>
-
-       
-
-      
-
-        
-       
         
     </SafeAreaView>
 

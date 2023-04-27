@@ -6,15 +6,13 @@ import LoanSummary from '../components/LoanSummary'
 import SectionHeader from '../components/SectionHeader'
 import Item from '../components/Item'
 import FlatListRenderItem from '../components/FlatListRenderItem'
-import { useMaxAuth } from '../Context/MaxAuthContext'
 
-// import { useAuthentication } from '../Context/Authentication'
 
 
 
 const HomeOverViewScreen = ({ navigation }) => {
 
-    const { logout } = useMaxAuth()
+    // const { logout } = useMaxAuth()
 
     const [bal, setBal] = useState(2154)
     
@@ -30,7 +28,7 @@ const HomeOverViewScreen = ({ navigation }) => {
 
 
     function signOut() {
-        logout()
+        // logout()
     }
 
     function handleActiveLoanNavigation(id) {
@@ -50,7 +48,8 @@ const HomeOverViewScreen = ({ navigation }) => {
         
 <SafeAreaView style={styles.rootContainer}>
             
-<OverviewWelcomeHeader onPress={logout} />
+{/* <OverviewWelcomeHeader onPress={logout} /> */}
+<OverviewWelcomeHeader onPress={signOut} /> 
 <SavingSummary />
 <LoanSummary amount={bal} topTitle={topTitle} bottomTitle={bottomTitle}/>
 
