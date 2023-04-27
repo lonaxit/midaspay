@@ -1,11 +1,12 @@
-import React, {  useState } from 'react'
-import { SafeAreaView, StyleSheet, TextInput, TouchableOpacity, useWindowDimensions } from 'react-native'
+import React, {  useContext, useState } from 'react'
+import { Alert, SafeAreaView, StyleSheet, TextInput, TouchableOpacity, useWindowDimensions } from 'react-native'
 import { Image, Text, View } from 'react-native'
 import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { useAuthentication } from '../Context/Authentication';
-// import { useAuth } from '../Context/AuthContext';
+// import { useMaxAuth } from '../Context/MaxAuthContext';
 
+// import { useAuth } from '../Context/AuthContext';
 
 
 const LoginScreen = () => {
@@ -13,33 +14,42 @@ const LoginScreen = () => {
   const navigation = useNavigation()
 
 // const { test } = useAuth()
-  
+    
   
   const { login } = useAuthentication()
+
+  // const {login, authenticated, authtoken} = useMaxAuth()
+
 
   const [username, setUsername] = useState(null)
   const [password, setPassword] = useState(null)
 
-  // 
-  // const signin = async () => {
 
-  //   const res = await login(username, password)
-  //   if (res && res.error) {
-  //     alert(`something went wrong`)
-  //   } 
+  // Max Login 
+  // const MaxLogin = async (username, password) => {
+    
+  //   //setIsAuthenticating(true) 
+  //   try {
+  //     const mytoken = await APIService.APIlogin(username, password);
+  //     console.log(mytoken)
+  //     authenticate(mytoken)
+      
+  //   } catch (error) {
+  //     console.log(`Error occurred: ${error.message}`);
+  //     Alert.alert('Authehntication Failed','Could not log you in please check your credentials');
+  //   }
+  //   // setIsAuthenticating(false)
+  // };
 
-  // }
-  const signin = async () => {
+
+  const signin = async (username,password) => {
+    //setIsAuthenticating(true) 
     try {
       const res = await login(username, password);
-      if (res && res.error) {
-        throw new Error('Something went wrong');
-      }
-      // handle success scenario
     } catch (error) {
-      console.log(`Error occurred: ${error.message}`);
-      alert('Something went wrong');
+      Alert.alert('Authehntication Failed','Could not log you in please check your credentials');
     }
+    // setIsAuthenticating(false)
   };
   
   return (

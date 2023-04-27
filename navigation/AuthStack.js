@@ -4,7 +4,7 @@ import OnboardingScreen from '../screens/OnboardingScreen';
 import HomeScreen from '../screens/HomeScreen';
 import LoginScreen from '../screens/LoginScreen';
 import InactiveLoanScreen from '../screens/InactiveLoanScreen';
-import ApplyMembershipScreen from '../screens/RegistrationScreen';
+import JoinScreen from '../screens/JoinScreen';
 
 
 
@@ -17,16 +17,9 @@ const AuthStack = () => {
   return (
     <Stack.Navigator screenOptions={{headerShown:false}}>
     <Stack.Screen component={OnboardingScreen} name="Onboarding"/>
- 
     <Stack.Screen component={LoginScreen} name="Login" />
-    <Stack.Screen component={ApplyMembershipScreen} name="newmembership" options={{headerShown:true}}/>
-          
-          {/* <Stack.Screen component={LoginScreen} name="Login"   options={{
-        title: 'Login',
-        headerTitleAlign: 'center',
-        headerShadowVisible: false 
-      }}/> */}
-  </Stack.Navigator>
+    <Stack.Screen component={JoinScreen} name="newmembership" options={{headerShown:true}}/>
+    </Stack.Navigator>
   )
 }
 

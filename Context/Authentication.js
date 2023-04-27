@@ -25,7 +25,6 @@ export const AuthenticationProvider = ({ children }) => {
     const login = async (username, password) => {
         // setIsLoading(true)
       try {
-          
         const result = await axios.post(`${BASE_URL_APP}/token/login/`,{username,  password
         })
            
@@ -48,7 +47,8 @@ export const AuthenticationProvider = ({ children }) => {
       
             return { err: `Error has occurred ${error}` };
             
-        } 
+      } 
+      //setIsLoading(false)
         
     }
 
@@ -72,8 +72,7 @@ export const AuthenticationProvider = ({ children }) => {
       const result = await axios.get(`${BASE_URL_AUTH}/me`)
          
       setUserData(result.data.user);
-      console.log('hhhhhhhhh=======mmmmmmmm')
-      console.log(userData)
+   
       
     } catch (error) {
       console.log(error);

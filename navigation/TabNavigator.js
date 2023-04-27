@@ -4,9 +4,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from '../screens/HomeScreen';
 import ProfileScreen from '../screens/ProfileScreen';
-import NewLoanScreen from '../screens/NewLoan';
-import SavingHomeScreen from '../screens/SavingHome'
-import LoanHomeScreen from '../screens/LoanHome'
+import NewLoanScreen from '../screens/NewLoanScreen';
+import SavingHomeScreen from '../screens/SavingHomeScreen'
+import LoanHomeScreen from '../screens/LoanHomeScreen'
 import InactiveLoanScreen from '../screens/InactiveLoanScreen'
 import { Ionicons } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
@@ -47,6 +47,7 @@ const AppStack = () => {
 
 const TabNavigator = () => {
     return (
+        
         <Tab.Navigator
             screenOptions={{
                 headerShown: false,

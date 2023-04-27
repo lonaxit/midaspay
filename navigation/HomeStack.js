@@ -3,7 +3,7 @@ import React from 'react'
 import { createDrawerNavigator } from '@react-navigation/drawer';
 // import HomeScreen from '../screens/HomeScreen'; replaced by TabNavigator
 import ProfileScreen from '../screens/ProfileScreen';
-import NewLoanScreen from '../screens/NewLoan';
+import NewLoanScreen from '../screens/NewLoanScreen';
 
 import CustomDrawer from '../components/route/CustomDrawer'
 import { Ionicons } from '@expo/vector-icons';

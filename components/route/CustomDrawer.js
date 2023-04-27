@@ -27,8 +27,6 @@ const { logout, authenticated,authtoken } = useAuthentication()
                     <Text style={{ fontSize: 20 }}>Tivkaa Luper</Text> 
                     <Text style={{ fontSize: 16 }}>O-08</Text>  
                     <Text style={{ fontSize: 12 }}>317752</Text>
-                 
-                    
              </View>
                
                 
