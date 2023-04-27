@@ -44,14 +44,10 @@ export default function App() {
   //  </AuthProvider>
     
     // working from previous branch
-    <AuthenticationProvider>
-    <AppNav/>
-   </AuthenticationProvider>
-    
-
-    
-   
-   
+    // <AuthenticationProvider>
+    // <AppNav/>
+    // </AuthenticationProvider>
+     <AppNav/>
   );
 }
 
