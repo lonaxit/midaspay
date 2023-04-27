@@ -4,49 +4,22 @@ import { Image, Text, View } from 'react-native'
 import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { useAuthentication } from '../Context/Authentication';
-// import { useMaxAuth } from '../Context/MaxAuthContext';
-
-// import { useAuth } from '../Context/AuthContext';
 
 
 const LoginScreen = () => {
   const { height } = useWindowDimensions()
   const navigation = useNavigation()
-
-// const { test } = useAuth()
-    
-  
   const { login } = useAuthentication()
-
-  // const {login, authenticated, authtoken} = useMaxAuth()
-
-
   const [username, setUsername] = useState(null)
   const [password, setPassword] = useState(null)
-
-
-  // Max Login 
-  // const MaxLogin = async (username, password) => {
-    
-  //   //setIsAuthenticating(true) 
-  //   try {
-  //     const mytoken = await APIService.APIlogin(username, password);
-  //     console.log(mytoken)
-  //     authenticate(mytoken)
-      
-  //   } catch (error) {
-  //     console.log(`Error occurred: ${error.message}`);
-  //     Alert.alert('Authehntication Failed','Could not log you in please check your credentials');
-  //   }
-  //   // setIsAuthenticating(false)
-  // };
-
 
   const signin = async (username,password) => {
     //setIsAuthenticating(true) 
     try {
       const res = await login(username, password);
+  
     } catch (error) {
+      console.log(error)
       Alert.alert('Authehntication Failed','Could not log you in please check your credentials');
     }
     // setIsAuthenticating(false)
@@ -116,8 +89,7 @@ const LoginScreen = () => {
           <Text style={{fontFamily:'nunito-mediumItalic', fontSize:14, color:'#363130',textAlign:'center'}}>Apply for membership</Text>
           </TouchableOpacity>
         </View>
-        <Text>{username}</Text>
-        <Text>{password}</Text>
+       
         
 
 
