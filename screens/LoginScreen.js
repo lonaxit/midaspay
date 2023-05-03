@@ -3,6 +3,8 @@ import { Alert, SafeAreaView, StyleSheet, TextInput, TouchableOpacity, useWindow
 import { Image, Text, View } from 'react-native'
 import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import { useAuth } from '../contextAPI/AuthContext';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 
 
@@ -13,9 +15,13 @@ const LoginScreen = () => {
   const [username, setUsername] = useState(null)
   const [password, setPassword] = useState(null)
 
+  const { isLoading, authenticate } = useAuth()
+
 
   return (
     <SafeAreaView style={{flex:1,backgroundColor:'#f9fbfc'}}>
+
+      <Spinner visible={isLoading}/>
       <View style={{alignItems:'center', marginTop:50}}>
         <Image source={require('../assets/images/logo.png')} style={[styles.logo]} resizeMode='contain' />
       </View>
@@ -57,7 +63,7 @@ const LoginScreen = () => {
           </TouchableOpacity>
       </View>
         
-        <TouchableOpacity onPress={()=>{}} style={{
+        <TouchableOpacity onPress={() => { authenticate(username, password) }} style={{
             backgroundColor: '#af3015',
             padding: 20,
             borderRadius: 10,

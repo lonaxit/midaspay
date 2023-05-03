@@ -9,7 +9,7 @@ import { View } from 'react-native'
 // import { useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import styles from './homeloancard.style'
-import { useAuthentication } from '../../../../Context/Authentication';
+
 
 const HomeLoanCard = () => {
   const [balance, setBalance] = useState(2001258)

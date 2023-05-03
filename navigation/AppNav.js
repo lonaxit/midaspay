@@ -2,12 +2,19 @@ import React, { useContext } from 'react'
 import { NavigationContainer } from '@react-navigation/native';
 import { ActivityIndicator, View } from 'react-native';
 import MidasHomeStack from './MidasHomeStack';
+import AuthStack from './AuthStack'
+import { useAuth } from '../contextAPI/AuthContext';
+import MidasSplashStack from './MidasSplashStack';
+
+
+
+
+
 
 
 
 const AppNav = () => {
-
-
+const { jwtToken,splashLoading } = useAuth()
 
 
 
@@ -26,7 +33,17 @@ const AppNav = () => {
 
 
     <NavigationContainer>
-      <MidasHomeStack/>
+      {splashLoading ?
+        (
+          <MidasSplashStack /> 
+        ): jwtToken ?
+        (
+          <MidasHomeStack />
+        ) : (
+          <AuthStack />
+        )}
+
+      {/* { jwtToken ? <MidasHomeStack/> : <AuthStack/> } */}
     </NavigationContainer>
   )
 }

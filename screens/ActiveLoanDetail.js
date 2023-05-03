@@ -24,8 +24,11 @@ const ActiveLoanDetail = ({route,navigation}) => {
 const loanDetail = data.filter(item => item.id === loanId);
   return (
     <View style={globalStyles.rootContainer}>
+      
           <LoanSummary amount={test} topTitle={topTitle}/>
           {/* output list of deductions for the loan */}
+
+          <Text>{loanId }</Text>
 
           <FlatList
                  data={loanDetail}

@@ -1,75 +1,85 @@
-import React, { useState } from 'react'
-import { View, Text, StyleSheet, Pressable, ImageBackground, SafeAreaView, FlatList } from 'react-native'
+import React, { useState ,useEffect} from 'react'
+import { View,  StyleSheet, SafeAreaView, FlatList, ActivityIndicator, Text,Pressable } from 'react-native'
 import OverviewWelcomeHeader from '../components/OverviewWelcomeHeader'
 import SavingSummary from '../components/SavingSummary'
 import LoanSummary from '../components/LoanSummary'
 import SectionHeader from '../components/SectionHeader'
 import Item from '../components/Item'
 import FlatListRenderItem from '../components/FlatListRenderItem'
-
+import { useAuth } from '../contextAPI/AuthContext'
+import Spinner from 'react-native-loading-spinner-overlay'
 
 
 
 const HomeOverViewScreen = ({ navigation }) => {
+const [bal,setBal] = useState(25452)
+const { isLoading, logout,userData,fetchProfile,myLoans,loans,jwtToken } = useAuth()
 
-    // const { logout } = useMaxAuth()
+   
+const [data, setUsers] = useState([
+    {id:1, name: 'John', amount: 2500, deduction:2310 },
 
-    const [bal, setBal] = useState(2154)
-    
-    const [data, setData] = useState([
-        { id: 1, name: 'Long Term Loan', deduction: 75000, amount: 2500000, description:'Feb IPPIPS Deduction, 23' },
-        { id: 2, name: 'Short Term Loan', deduction: 45000, amount: 750000, description:'Feb IPPIPS Deduction, 23' },
-        { id: 3, name: 'Fertilizer Loan', deduction: 25000, amount: 50000,description:'Feb IPPIPS Deduction, 23'},
-        { id: 4, name: 'Christmas Package', deduction: 10000, amount: 150000,description:'Feb IPPIPS Deduction, 23' },
-        { id: 5, name: 'Land Scheme', deduction: 200000, amount: 1800000,description:'Feb IPPIPS Deduction, 23' },
-        { id: 6, name: 'Household Items', deduction: 14585, amount: 65000, description: 'Feb IPPIPS Deduction, 23' },
-        { id: 7, name: 'Household Items', deduction: 14585, amount: 8000,description:'Feb IPPIPS Deduction, 23' },
-    ])
-
-
-    function signOut() {
-        // logout()
-    }
-
-    function handleActiveLoanNavigation(id) {
-        navigation.navigate('activeloandetail',{loanId:id})
-    }
+]);
 
     function handleInactiveLoanNavigation() {
         navigation.navigate('inactiveloans')
     }
 
+    const handleActiveLoanNavigation = loan => {
+        navigation.navigate('activeloandetail',{loanId:loan.id})
+    };
+    
+
+    // useEffect(() => {
+    //     fetchProfile()
+    // },[])
+
+    const userLoans = userData.loanowner
+
+    const filteredLoans = userLoans.filter(item => item.active === true)
+
+    const totalBalance = filteredLoans.reduce((accumulator, record) => accumulator + record.total_balance, 0);
     
     const topTitle = 'The figure below is a snapshot of your total indebtedness to MIDAS Touch'
-    const bottomTitle ='Remaining on your loan ledger'
+    const bottomTitle = 'Remaining on your loan ledger'
 
-    return (
+     // check for loading spinner
+     if (!userData) {
+        return (
+          <View style={{flex:1, justifyContent:'center',alignItems:'center'}}>
+            <ActivityIndicator size={'large'} />
+        </View>
+        )
+    }
 
-        
+    return (     
 <SafeAreaView style={styles.rootContainer}>
             
 {/* <OverviewWelcomeHeader onPress={logout} /> */}
-<OverviewWelcomeHeader onPress={signOut} /> 
+{/* <Spinner visible={isLoading} /> */}
+
+
+            
+<OverviewWelcomeHeader onPress={logout} /> 
 <SavingSummary />
-<LoanSummary amount={bal} topTitle={topTitle} bottomTitle={bottomTitle}/>
+<LoanSummary amount={totalBalance} topTitle={topTitle} bottomTitle={bottomTitle}/>
 
 <SectionHeader onPress={handleInactiveLoanNavigation}/>
 
-       
-               <FlatList
-                 data={data}
+        
+             <FlatList
+                 data={filteredLoans}
                   renderItem={({ item }) => (
                       <FlatListRenderItem
-                          title={item.name}
-                          description={item.description}
-                          deduction={item.deduction}
-                          totalamount={item.amount}
-                          onPress={()=>handleActiveLoanNavigation(item.id)}
+                          title={item.product_name}
+                          deduction={item.monthly_deduction}
+                          totalamount={item.approved_amount}
+                          onPress={()=>handleActiveLoanNavigation(item)}
                       />  
                    )}
                    keyExtractor={(item) => item.id.toString()}
                    showsVerticalScrollIndicator={false}
-            />        
+            />         
   </SafeAreaView>
   
   )
@@ -115,14 +125,21 @@ const styles = StyleSheet.create({
       title: {
         fontSize: 32,
       },
-    // container: {
-       
-    //     paddingTop:30,
-    //     paddingRight: 20,
-    //     paddingLeft: 20,
-    //     flex: 1,
-    //     backgroundColor: '#fff',
-    // },
+      loanItemContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingVertical: 10,
+        borderRadius:4,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 1.41,
+        elevation: 2,
+        backgroundColor: '#fff',
+        marginBottom:8,
+    }
 
   
 })

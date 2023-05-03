@@ -2,13 +2,17 @@ import React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, Image, SafeAreaView } from 'react-native';
 
 import { MaterialIcons } from '@expo/vector-icons';
+import { useAuth } from '../contextAPI/AuthContext';
 
-const OnboardingScreen = ({navigation}) => {
+const OnboardingScreen = ({ navigation }) => {
+  
+  const { jwtToken } = useAuth()
   return (
     <SafeAreaView style={styles.parentContainer}>
 
     <View style={{marginTop:50}}>
-      <Text style={styles.namePlate}>MIDAS-Mobile</Text>
+        <Text style={styles.namePlate}>MIDAS-Mobile</Text>
+        <Text>{jwtToken}</Text>
      
     </View>
 

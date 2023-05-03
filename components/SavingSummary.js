@@ -1,17 +1,21 @@
 import { View, Text, ActivityIndicator, Pressable } from 'react-native'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { StyleSheet } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
+import { useAuth } from '../contextAPI/AuthContext'
 
 
 
 
 const SavingSummary = () => {
   const nav =  useNavigation()
-const [balance,setBalance] = useState(142587)
+
+  
+  const { userData } = useAuth()
+  // const [bal, setBal] = useState(525)
 
     // check for loading spinner
-    if (!balance) {
+    if (!userData) {
         return (
           <View style={{flex:1, justifyContent:'center',alignItems:'center'}}>
             <ActivityIndicator size={'large'} />
@@ -22,8 +26,9 @@ const [balance,setBalance] = useState(142587)
   return (
 <Pressable android_ripple={{color:'#ccc'}} onPress={()=>nav.navigate('usersavingdetail',{userId:1})}>
         <View style={styles.card}>
-              <Text style={styles.balance}>₦{balance.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</Text>
-              <Text style={styles.label}>Available on your savings</Text>
+              <Text style={styles.balance}>₦{userData.totalSaving.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</Text>
+        <Text style={styles.label}>Available on your savings</Text>
+      
         </View>
   </Pressable>
   )

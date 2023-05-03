@@ -5,17 +5,16 @@ import React, { useEffect, useState } from 'react'
 import styles from './savingbal.style'
 import { BASE_URL_AUTH } from '../../../config'
 import axios from 'axios'
-import { useAuthentication } from '../../../Context/Authentication'
 import { ActivityIndicator } from 'react-native';
 
  
 
 const SavingBalCard = ({route}) => {
 
+const [amount, setAmount] = useState(12457)
+  // const { authtoken,userData,authenticated, fetchUserData }= useAuthentication()
 
-  const { authtoken,userData,authenticated, fetchUserData }= useAuthentication()
-
-  useEffect(() => {
+  // useEffect(() => {
 
     // because fetchUserData returns a promise, we can wrap in an async/wait
     //when fetch data returns a value
@@ -23,9 +22,10 @@ const SavingBalCard = ({route}) => {
     //   await fetchUserData();
     // }
     // getuserData()
-    fetchUserData();
+  
+    // fetchUserData();
 
-  }, []);
+  // }, []);
 
   if (!userData) {
     return (
@@ -38,7 +38,7 @@ const SavingBalCard = ({route}) => {
   return (
 <TouchableOpacity>
         <View style={styles.card}>
-              <Text style={styles.balance}>₦{userData.totalSaving.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</Text>
+              <Text style={styles.balance}>₦{amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</Text>
               <Text style={styles.label}>Available on your savings</Text>
         </View>
   </TouchableOpacity>

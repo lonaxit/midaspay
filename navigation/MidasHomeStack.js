@@ -6,12 +6,17 @@ import SavingOverviewDetailScreen from '../screens/SavingOverviewDetailScreen';
 import ActiveLoanDetail from '../screens/ActiveLoanDetail';
 import InactiveLoanScreen from '../screens/InactiveLoanScreen';
 import MidasTabStack from './MidasTabStack';
+import { useAuth } from '../contextAPI/AuthContext';
+import SplashScreen from '../screens/SplashScreen';
 
 
 
 const Stack = createNativeStackNavigator();
 
 const MidasHomeStack = () => {
+  const { splashLoading } = useAuth()
+  
+
   return (
     <Stack.Navigator screenOptions={{
       
@@ -23,13 +28,11 @@ const MidasHomeStack = () => {
          fontWeight:'bold'
       }
       }}>
-          
-      {/* <Stack.Screen component={HomeOverViewScreen} name="homeoverview" options={{
-        title: 'Dashboard',
-      }} /> */}
       
       <Stack.Screen component={MidasTabStack} name="Dashboard"
-      />
+        options={{
+         headerShown:false
+       }}/>
       <Stack.Screen component={SavingOverviewDetailScreen} name="usersavingdetail" options={{
         title:'Saving Detail'
       }} />
