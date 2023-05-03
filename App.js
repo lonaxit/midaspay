@@ -5,9 +5,9 @@ import { StyleSheet, Text, View, TouchableOpacity, Image, SafeAreaView } from 'r
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
-
-//working from old branch
 import AppNav from './navigation/AppNav';
+import { AuthProvider } from './contextAPI/AuthContext';
+
 
 
 
@@ -47,7 +47,11 @@ export default function App() {
     // <AuthenticationProvider>
     // <AppNav/>
     // </AuthenticationProvider>
-     <AppNav/>
+
+    <AuthProvider>
+      <AppNav/>
+    </AuthProvider>
+     
   );
 }
 
