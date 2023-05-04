@@ -3,11 +3,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import { ActivityIndicator, View } from 'react-native';
 import MidasHomeStack from './MidasHomeStack';
 
-
+import AuthStack from './AuthStack'
+import { useMidasAuth } from '../AppStore/AuthorizationContext';
 
 const AppNav = () => {
 
-
+const { token, authenticated } = useMidasAuth()
 
 
 
@@ -26,7 +27,8 @@ const AppNav = () => {
 
 
     <NavigationContainer>
-      <MidasHomeStack/>
+    { authenticated ? <MidasHomeStack/> : <AuthStack/> }
+      {/* <MidasHomeStack/> */}
     </NavigationContainer>
   )
 }
