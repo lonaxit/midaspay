@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 //working from old branch
 import AppNav from './navigation/AppNav';
 
+import { AuthorizationProvider } from './AppStore/AuthorizationContext';
 
 
 export default function App() {
@@ -39,15 +40,10 @@ export default function App() {
 
   // Authentication, if user logged in HomeStack is shown else show AuthStack
   return (
-  // <AuthProvider>
-  //  <AppNav/>
-  //  </AuthProvider>
-    
-    // working from previous branch
-    // <AuthenticationProvider>
-    // <AppNav/>
-    // </AuthenticationProvider>
+<AuthorizationProvider>
      <AppNav/>
+</AuthorizationProvider>
+    
   );
 }
 
