@@ -1,35 +1,25 @@
-import React, { useState } from 'react'
-import { View, Text, StyleSheet, Pressable, ImageBackground, SafeAreaView, FlatList } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { View, Text, StyleSheet, Pressable, ImageBackground, SafeAreaView, FlatList, ActivityIndicator } from 'react-native'
 import OverviewWelcomeHeader from '../components/OverviewWelcomeHeader'
 import SavingSummary from '../components/SavingSummary'
 import LoanSummary from '../components/LoanSummary'
 import SectionHeader from '../components/SectionHeader'
-import Item from '../components/Item'
 import FlatListRenderItem from '../components/FlatListRenderItem'
+import { useMidasAuth } from '../AppStore/AuthorizationContext'
 
 
 
 
 const HomeOverViewScreen = ({ navigation }) => {
-
-    // const { logout } = useMaxAuth()
-
-    const [bal, setBal] = useState(2154)
-    
-    const [data, setData] = useState([
-        { id: 1, name: 'Long Term Loan', deduction: 75000, amount: 2500000, description:'Feb IPPIPS Deduction, 23' },
-        { id: 2, name: 'Short Term Loan', deduction: 45000, amount: 750000, description:'Feb IPPIPS Deduction, 23' },
-        { id: 3, name: 'Fertilizer Loan', deduction: 25000, amount: 50000,description:'Feb IPPIPS Deduction, 23'},
-        { id: 4, name: 'Christmas Package', deduction: 10000, amount: 150000,description:'Feb IPPIPS Deduction, 23' },
-        { id: 5, name: 'Land Scheme', deduction: 200000, amount: 1800000,description:'Feb IPPIPS Deduction, 23' },
-        { id: 6, name: 'Household Items', deduction: 14585, amount: 65000, description: 'Feb IPPIPS Deduction, 23' },
-        { id: 7, name: 'Household Items', deduction: 14585, amount: 8000,description:'Feb IPPIPS Deduction, 23' },
-    ])
+  
+    const { logout,userInfo,fetchUser } = useMidasAuth()
 
 
-    function signOut() {
-        // logout()
-    }
+
+    useEffect(() => {
+        fetchUser()
+    },[])
+
 
     function handleActiveLoanNavigation(id) {
         navigation.navigate('activeloandetail',{loanId:id})
@@ -39,9 +29,24 @@ const HomeOverViewScreen = ({ navigation }) => {
         navigation.navigate('inactiveloans')
     }
 
-    
     const topTitle = 'The figure below is a snapshot of your total indebtedness to MIDAS Touch'
-    const bottomTitle ='Remaining on your loan ledger'
+    const bottomTitle = 'Remaining on your loan ledger'
+
+    
+    
+    if (!userInfo.loanowner) {
+        return (
+          <View style={{flex:1, justifyContent:'center',alignItems:'center'}}>
+            <ActivityIndicator size={'large'} />
+        </View>
+        )
+    }
+    
+    let activeLoans = userInfo.loanowner.filter(loan => loan.active === true)
+
+    // sum total loan balance
+    
+const totalBalance = activeLoans.reduce((accumulator, record) => accumulator + record.  total_balance, 0);
 
     return (
 
@@ -49,21 +54,22 @@ const HomeOverViewScreen = ({ navigation }) => {
 <SafeAreaView style={styles.rootContainer}>
             
 {/* <OverviewWelcomeHeader onPress={logout} /> */}
-<OverviewWelcomeHeader onPress={signOut} /> 
-<SavingSummary />
-<LoanSummary amount={bal} topTitle={topTitle} bottomTitle={bottomTitle}/>
+<OverviewWelcomeHeader onPress={logout} /> 
+        <SavingSummary totalsaving={userInfo.totalSaving} />
+        
+<LoanSummary amount={totalBalance} topTitle={topTitle} bottomTitle={bottomTitle}/>
 
 <SectionHeader onPress={handleInactiveLoanNavigation}/>
 
        
                <FlatList
-                 data={data}
+                 data={activeLoans}
                   renderItem={({ item }) => (
                       <FlatListRenderItem
-                          title={item.name}
-                          description={item.description}
-                          deduction={item.deduction}
-                          totalamount={item.amount}
+                          title={item.product_name}
+                        //   description={item.description}
+                          deduction={item.monthly_deduction}
+                          totalamount={item.approved_amount}
                           onPress={()=>handleActiveLoanNavigation(item.id)}
                       />  
                    )}
