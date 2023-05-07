@@ -19,7 +19,7 @@ const LoanSummary = ({amount,topTitle,bottomTitle}) => {
         </View>
         
         <View>
-            <Text style={styles.balanceText}>₦{amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</Text>
+            <Text style={styles.balanceText}>₦{parseFloat(amount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</Text>
         </View>
 
         <View>
