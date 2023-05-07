@@ -6,7 +6,8 @@ import { useNavigation } from '@react-navigation/native'
 
 
 
-const SavingSummary = () => {
+const SavingSummary = ({ totalsaving }) => {
+  
   const nav =  useNavigation()
 const [balance,setBalance] = useState(142587)
 
@@ -20,9 +21,9 @@ const [balance,setBalance] = useState(142587)
       }
     
   return (
-<Pressable android_ripple={{color:'#ccc'}} onPress={()=>nav.navigate('usersavingdetail',{userId:1})}>
+<Pressable android_ripple={{color:'#ccc'}} onPress={()=>nav.navigate('usersavingdetail',{depositTotal:totalsaving})}>
         <View style={styles.card}>
-              <Text style={styles.balance}>₦{balance.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</Text>
+              <Text style={styles.balance}>₦{parseFloat(totalsaving).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</Text>
               <Text style={styles.label}>Available on your savings</Text>
         </View>
   </Pressable>
