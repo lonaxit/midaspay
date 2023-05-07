@@ -17,8 +17,52 @@ export const AuthorizationProvider = ({ children }) => {
     // state variables
     const [token, setToken] = useState(null)
     const [authenticated, setAuthenticated] = useState(false)
-    const [isAuthenticating, setIsAuthenticating]= useState(false)
+    const [isAuthenticating, setIsAuthenticating] = useState(false)
+    const [userInfo, setUserInfo] = useState([])
+    const [ loanInfo, setLoanInfo ] = useState([])
+  const [isFetching, setIsFetching] = useState(false)
+  const [isFetchingSaving, setIsFetchingSaving] = useState(false)
+  const [ savingInfo, setSavingInfo ] = useState([])
+
+
    
+    // fetch userinfo
+    const fetchUser = async () => {
+        try {
+            const result = await axios.get(`${BASE_URL_AUTH}/me`)
+            setUserInfo(result.data.user)
+        } catch (e) {
+            return {message:'Error fetching user'}
+        }
+    };
+
+    // 
+    const detailLoan = async (id) => {
+        setIsFetching(true)
+        try {
+          const res = await axios.get(`${BASE_URL_APP}/loan/${id}/`)
+          setLoanInfo(res.data)
+        } catch (error) {
+          setIsFetching(false)
+          return { err: `Loan fetching error has occurred ${error}` };
+  
+        }
+        setIsFetching(false)
+  }
+  
+  // saving detail
+  const savingList = async () => {
+    setIsFetchingSaving(true)
+    try {
+      const res = await axios.get(`${BASE_URL_APP}/user-deposit/`)
+      setSavingInfo(res.data)
+    } catch (error) {
+      setIsFetchingSaving(false)
+      return { err: `Deposits fetching error has occurred ${error}` };
+
+    }
+    setIsFetchingSaving(false)
+  }
 
 
      // create useEffect
@@ -30,7 +74,7 @@ export const AuthorizationProvider = ({ children }) => {
 
              if (token) {
                 
-                 console.log(`stored token ${token}`)
+                //  console.log(`stored token ${token}`)
                  
                 axios.defaults.headers.common['Authorization'] = `Token ${token}`
                 setToken(token)
@@ -45,7 +89,7 @@ export const AuthorizationProvider = ({ children }) => {
     
     //login
     const login = async (username, password) => {
-        // setIsAuthentication(true)
+         setIsAuthenticating(true)
       try {
         const result = await axios.post(`${BASE_URL_APP}/token/login/`,{username,  password
         })
@@ -61,11 +105,11 @@ export const AuthorizationProvider = ({ children }) => {
             await SecureStore.setItemAsync('TOKEN_KEY', auth_Token)
             
         } catch (error) {
-            //setIsAuthentication(false)
+            setIsAuthenticating(false)
             return { err: `Login Error has occurred ${error}` };
             
       } 
-      //setIsAuthentication(false)
+      setIsAuthenticating(false)
         
     }
 
@@ -82,9 +126,11 @@ export const AuthorizationProvider = ({ children }) => {
         setToken(null)
         setAuthenticated(false)
 
-  }
+    }
+    
+    
 
-    const value ={ login, logout, authenticated,token }
+    const value ={ login, logout,fetchUser, detailLoan,savingList,loanInfo,savingInfo, isFetching,authenticated,token,userInfo,isAuthenticating,isFetchingSaving }
     
   return (
         <MIDASContext.Provider value={value}>
