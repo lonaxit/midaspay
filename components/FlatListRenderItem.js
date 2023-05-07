@@ -9,13 +9,13 @@ const FlatListRenderItem = ({onPress,title,description,deduction,totalamount}) =
                     <View style={styles.loanItemContainer}>
                     <View style={{padding:4}}>
                         <Text style={{ fontWeight: 'bold', color: 'black' ,fontSize:14, fontFamily:'nunito-medium' }}>{title}</Text>
-                        <Text style={{ color: 'black', fontSize:11 }}>{description}: ₦{deduction.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}
+                        <Text style={{ color: 'black', fontSize:11 }}> ₦{parseFloat(deduction).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}
                         </Text>
                     </View>
                     
                     <View style={{padding:4}}>
                     <Text style={{ fontFamily:'nunito-regular', color: 'black', fontSize:12 }}>
-                    ₦{totalamount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}
+                    ₦{parseFloat(totalamount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}
                     </Text>
                     </View>
                     
