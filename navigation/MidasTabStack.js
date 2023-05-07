@@ -9,13 +9,18 @@ import SavingHomeScreen from '../screens/SavingHomeScreen';
 import NewLoanScreen from '../screens/NewLoanScreen';
 // import JoinScreen from '../screens/JoinScreen';
 import HomeOverViewScreen from '../screens/HomeOverViewScreen';
-
+import { useMidasAuth } from '../AppStore/AuthorizationContext';
 
 
 const Tab = createBottomTabNavigator();
 
 
 const MidasTabStack = () => {
+    const { userInfo, fetchUser } = useMidasAuth()
+    let loanCount = ''
+    if(userInfo.loanowner) {
+        loanCount = userInfo.loanowner.filter(loan => loan.active === true) 
+    }
   return (
     <Tab.Navigator
             screenOptions={{
@@ -30,7 +35,7 @@ const MidasTabStack = () => {
 
             <Tab.Screen component={LoanHomeScreen} name="Loans"
               options={{
-                    tabBarBadge: 3,
+                    tabBarBadge:loanCount.length,
                     tabBarBadgeStyle: {
                         backgroundColor:'#bb6b5a'
                     },
