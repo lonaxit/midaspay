@@ -1,30 +1,36 @@
-import { View, Text, Pressable, FlatList } from 'react-native'
-import React, { useState } from 'react'
+import { View, Text,  FlatList, ActivityIndicator } from 'react-native'
+import React, { useEffect} from 'react'
 import SavingSummary from '../components/SavingSummary'
 import { StyleSheet } from 'react-native'
 import FlatListRenderItem from '../components/FlatListRenderItem'
 import globalStyles from '../style/global.style'
+import { useMidasAuth } from '../AppStore/AuthorizationContext'
+import SavingDetailItem from '../components/SavingDetailItem'
+
 
 const SavingOverviewDetailScreen = ({ route }) => {
 
-    const [data, setData] = useState([
-        { id: 1, name: 'Long Term Loan', deduction: 75000, amount: 2500000, description:'Feb IPPIPS Deduction, 23' },
-        { id: 2, name: 'Short Term Loan', deduction: 45000, amount: 750000, description:'Feb IPPIPS Deduction, 23' },
-        { id: 3, name: 'Fertilizer Loan', deduction: 25000, amount: 50000,description:'Feb IPPIPS Deduction, 23'},
-        { id: 4, name: 'Christmas Package', deduction: 10000, amount: 150000,description:'Feb IPPIPS Deduction, 23' },
-        { id: 5, name: 'Land Scheme', deduction: 200000, amount: 1800000,description:'Feb IPPIPS Deduction, 23' },
-        { id: 6, name: 'Household Items', deduction: 14585, amount: 65000, description: 'Feb IPPIPS Deduction, 23' },
-        { id: 7, name: 'Christmas Package', deduction: 10000, amount: 150000,description:'Feb IPPIPS Deduction, 23' },
-        { id: 8, name: 'Land Scheme', deduction: 200000, amount: 1800000,description:'Feb IPPIPS Deduction, 23' },
-        { id: 9, name: 'Household Items', deduction: 14585, amount: 65000,description:'Feb IPPIPS Deduction, 23' },
-    ])
+    const {savingInfo, savingList} = useMidasAuth()
+    
+    const depositTotal = route.params.depositTotal
 
+    useEffect(() => {
+        savingList()
+    }, [])
 
-    const userId = route.params.userId
+    if (!savingInfo) {
+        return (
+          <View style={{flex:1, justifyContent:'center',alignItems:'center'}}>
+            <ActivityIndicator size={'large'} />
+        </View>
+        )
+    }
+    
+
     return (
      
             <View style={styles.container}>
-            <SavingSummary />
+            <SavingSummary totalsaving={depositTotal} />
             <View style={styles.historyContainer}>
             <Text style={styles.historyText}>Records</Text>
             {/* <Pressable>
@@ -33,13 +39,14 @@ const SavingOverviewDetailScreen = ({ route }) => {
             </View>
     
             <FlatList
-            data={data}
+            data={savingInfo}
                       renderItem={({ item }) => (
-                        <FlatListRenderItem
-                          title={item.name}
-                          description={item.description}
-                          deduction={item.deduction}
-                          totalamount={item.amount}
+                        <SavingDetailItem
+                          credit={item.credit}
+                          description={item.narration}
+                          debit={item.debit}
+                              balance={item.balance}
+                              transaction_date={item.transaction_date}
                       />
                       )}
                 
