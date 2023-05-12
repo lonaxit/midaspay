@@ -19,12 +19,13 @@ export const AuthorizationProvider = ({ children }) => {
     const [authenticated, setAuthenticated] = useState(false)
     const [isAuthenticating, setIsAuthenticating] = useState(false)
     const [userInfo, setUserInfo] = useState([])
-    const [ loanInfo, setLoanInfo ] = useState([])
+    const [loanInfo, setLoanInfo ] = useState([])
   const [isFetching, setIsFetching] = useState(false)
   const [isFetchingSaving, setIsFetchingSaving] = useState(false)
-  const [ savingInfo, setSavingInfo ] = useState([])
-
-
+  const [savingInfo, setSavingInfo] = useState([])
+  
+  const [isProfile, setIsProfile] = useState(false)
+  const [profileInfo, setProfileInfo] = useState([])
    
     // fetch userinfo
     const fetchUser = async () => {
@@ -62,6 +63,21 @@ export const AuthorizationProvider = ({ children }) => {
 
     }
     setIsFetchingSaving(false)
+  }
+
+  // get profile
+  const getProfile = async (id) => {
+    setIsProfile(true)
+    try {
+      const res = await axios.get(`${BASE_URL_APP}/${id}/profile/`)
+      console.log(res.data)
+      setProfileInfo(res.data)
+    } catch (error) {
+      setIsProfile(false)
+      return { err: `Profile fetching error has occurred ${error}` };
+
+    }
+    setIsProfile(false)
   }
 
 
@@ -130,7 +146,7 @@ export const AuthorizationProvider = ({ children }) => {
     
     
 
-    const value ={ login, logout,fetchUser, detailLoan,savingList,loanInfo,savingInfo, isFetching,authenticated,token,userInfo,isAuthenticating,isFetchingSaving }
+    const value ={ login, logout,fetchUser, detailLoan,savingList,getProfile,loanInfo,savingInfo, isFetching,authenticated,token,userInfo,isAuthenticating,isFetchingSaving,isProfile,profileInfo }
     
   return (
         <MIDASContext.Provider value={value}>
