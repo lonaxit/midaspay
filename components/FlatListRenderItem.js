@@ -1,8 +1,9 @@
 import { View, Text, Pressable, StyleSheet } from 'react-native'
 import React from 'react'
 import globalStyles from '../style/global.style'
+import moment from 'moment'
 
-const FlatListRenderItem = ({onPress,title,description,deduction,totalamount}) => {
+const FlatListRenderItem = ({onPress,title,description,deduction,totalamount,loan_date}) => {
   return (
 
                   <Pressable onPress={onPress}>
@@ -10,15 +11,17 @@ const FlatListRenderItem = ({onPress,title,description,deduction,totalamount}) =
                     <View style={{padding:4}}>
                         <Text style={{ fontWeight: 'bold', color: 'black' ,fontSize:14, fontFamily:'nunito-medium' }}>{title}</Text>
                         <Text style={{ color: 'black', fontSize:11 }}> ₦{parseFloat(deduction).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}
-                        </Text>
+                      </Text>
+                    <Text style={styles.dateText}>
+                   {moment(loan_date).format('MMMM Do YYYY')}
+                    </Text>
                     </View>
                     
                     <View style={{padding:4}}>
                     <Text style={{ fontFamily:'nunito-regular', color: 'black', fontSize:12 }}>
                     ₦{parseFloat(totalamount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}
                     </Text>
-                    </View>
-                    
+                  </View>
                       </View>
                     </Pressable>
   
@@ -43,5 +46,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     marginBottom:8
     // borderBottomWidth:0.5
-},
+  },
+  dateText: {
+    fontWeight: 'bold',
+    color: '#FF5733',
+    fontSize: 10,
+    fontFamily: 'nunito-medium'
+}
 })
