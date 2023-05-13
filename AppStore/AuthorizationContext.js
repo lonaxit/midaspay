@@ -56,6 +56,7 @@ export const AuthorizationProvider = ({ children }) => {
     setIsFetchingSaving(true)
     try {
       const res = await axios.get(`${BASE_URL_APP}/user-deposit/`)
+      console.log(res.data)
       setSavingInfo(res.data)
     } catch (error) {
       setIsFetchingSaving(false)
@@ -70,7 +71,6 @@ export const AuthorizationProvider = ({ children }) => {
     setIsProfile(true)
     try {
       const res = await axios.get(`${BASE_URL_APP}/${id}/profile/`)
-      console.log(res.data)
       setProfileInfo(res.data)
     } catch (error) {
       setIsProfile(false)
