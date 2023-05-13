@@ -29,7 +29,7 @@ const HomeOverViewScreen = ({ navigation }) => {
         navigation.navigate('inactiveloans')
     }
 
-    const topTitle = 'The figure below is a snapshot of your total indebtedness to MIDAS Touch'
+    // const topTitle = 'The figure below is a snapshot of your total indebtedness to MIDAS Touch'
     const bottomTitle = 'Remaining on your loan ledger'
 
     
@@ -42,7 +42,7 @@ const HomeOverViewScreen = ({ navigation }) => {
         )
     }
     
-    let activeLoans = userInfo.loanowner.filter(loan => loan.active === true)
+let activeLoans = userInfo.loanowner.filter(loan => loan.active === true)
 
     // sum total loan balance
     
@@ -57,7 +57,7 @@ const totalBalance = activeLoans.reduce((accumulator, record) => accumulator + r
 <OverviewWelcomeHeader onPress={logout} /> 
         <SavingSummary totalsaving={userInfo.totalSaving} />
         
-<LoanSummary amount={totalBalance} topTitle={topTitle} bottomTitle={bottomTitle}/>
+<LoanSummary amount={totalBalance} bottomTitle={bottomTitle}/>
 
 <SectionHeader onPress={handleInactiveLoanNavigation}/>
 
@@ -67,7 +67,7 @@ const totalBalance = activeLoans.reduce((accumulator, record) => accumulator + r
                   renderItem={({ item }) => (
                       <FlatListRenderItem
                           title={item.product_name}
-                        //   description={item.description}
+                        loan_date={item.start_date}
                           deduction={item.monthly_deduction}
                           totalamount={item.approved_amount}
                           onPress={()=>handleActiveLoanNavigation(item.id)}
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
         paddingTop:30,
         paddingRight: 20,
         paddingLeft: 20,
-        backgroundColor:'#fff '
+        backgroundColor:'#fff'
     },
     card: {
         width: '90%',
