@@ -8,9 +8,9 @@ const LoanSummary = ({amount,topTitle,bottomTitle}) => {
   return (
     <Pressable >
     <LinearGradient
-      colors={['#000', '#fff']}
+      colors={['#CD5C5C', '#CD5C5C']}
       start={{ x: 0, y: 0 }}
-      end={{ x: 1, y: 2 }}
+      end={{ x: 1, y: 1 }}
       style={styles.loanContainer}
       >
             
@@ -55,13 +55,13 @@ const styles = StyleSheet.create({
     boldText: {
           fontSize:12,
           fontWeight: 'bold',
-         textAlign: 'center',
-         color: '#fff',
+          textAlign: 'center',
+          color: '#fff',
       },
     lightText: {
-          fontSize:12,
+          fontSize:14,
           textAlign: 'center',
-      fontWeight: '600',
-      color: '#fff',
+          fontWeight: '600',
+          color: '#fff',
     },
 })
