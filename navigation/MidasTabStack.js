@@ -10,7 +10,7 @@ import NewLoanScreen from '../screens/NewLoanScreen';
 // import JoinScreen from '../screens/JoinScreen';
 import HomeOverViewScreen from '../screens/HomeOverViewScreen';
 import { useMidasAuth } from '../AppStore/AuthorizationContext';
-
+import ProfileScreen from '../screens/ProfileScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -42,18 +42,23 @@ const MidasTabStack = () => {
                 tabBarIcon:({ color, size })=><AntDesign name="minuscircleo" color={color} size={size} />
             }}
             />
-
+{/* 
             <Tab.Screen component={SavingHomeScreen} name="Vault"
                 options={{
                  tabBarIcon:({ color, size })=><Feather name="shopping-bag" color={color} size={size} />
                 }}
-            />
+            /> */}
 
-            <Tab.Screen component={NewLoanScreen} name="Apply" options={{
+            {/* <Tab.Screen component={NewLoanScreen} name="Apply" options={{
                 tabBarIcon:({ color, size })=><AntDesign name="plus" color={color} size={size} />
                 }}
+          /> */}
+          <Tab.Screen component={ProfileScreen} name="Profile" options={{
+                tabBarIcon:({ color, size })=><AntDesign name="user" color={color} size={size} />
+                }}
           />
-{/*           
+          
+            {/*           
           <Tab.Screen component={JoinScreen} name="Join" options={{
                 tabBarIcon:({ color, size })=><AntDesign name="adduser" color={color} size={size} />
                 }}
