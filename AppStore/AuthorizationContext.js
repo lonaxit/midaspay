@@ -70,7 +70,7 @@ export const AuthorizationProvider = ({ children }) => {
   const getProfile = async (id) => {
     setIsProfile(true)
     try {
-      const res = await axios.get(`${BASE_URL_APP}/${id}/profile/`)
+      const res = await axios.get(`${BASE_URL_APP}/${id}/my-profile/`)
       setProfileInfo(res.data)
     } catch (error) {
       setIsProfile(false)
