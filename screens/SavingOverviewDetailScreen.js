@@ -10,7 +10,7 @@ import SavingDetailItem from '../components/SavingDetailItem'
 
 const SavingOverviewDetailScreen = ({ route }) => {
 
-    const {savingInfo, savingList} = useMidasAuth()
+    const {savingInfo, savingList,isFetchingSaving} = useMidasAuth()
     
     const depositTotal = route.params.depositTotal
 
@@ -18,7 +18,7 @@ const SavingOverviewDetailScreen = ({ route }) => {
         savingList()
     }, [])
 
-    if (!savingInfo) {
+    if (isFetchingSaving) {
         return (
           <View style={{flex:1, justifyContent:'center',alignItems:'center'}}>
             <ActivityIndicator size={'large'} />
