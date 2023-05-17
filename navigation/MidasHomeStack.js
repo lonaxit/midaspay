@@ -28,7 +28,9 @@ const MidasHomeStack = () => {
         title: 'Dashboard',
       }} /> */}
       
-      <Stack.Screen component={MidasTabStack} name="Dashboard"
+      <Stack.Screen component={MidasTabStack} name="Dashboard" options={{
+        headerShown:false
+      }}
       />
       <Stack.Screen component={SavingOverviewDetailScreen} name="usersavingdetail" options={{
         title:'Saving Detail'
