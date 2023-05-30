@@ -8,9 +8,10 @@ const globalStyles = StyleSheet.create({
     // },
     rootContainer: {
         flex: 1,
-        paddingTop:30,
+        paddingTop:5,
         paddingRight: 20,
         paddingLeft: 20,
+        backgroundColor:'#fff'
     },
     welcomeHeader: {
         flexDirection: 'row',
