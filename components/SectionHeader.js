@@ -11,11 +11,11 @@ const SectionHeader = ({leftText,rightText,onPress}) => {
   return (
         <View>
             <View style={globalStyles.historyContainer}>
-              <Text style={globalStyles.historyText}>History</Text>
+              <Text style={globalStyles.historyText}>{leftText}</Text>
               
-            <Pressable android_ripple={{color:'#ccc'}} onPress={onPress}>
+            {/* <Pressable android_ripple={{color:'#ccc'}} onPress={onPress}>
                 <Text style={globalStyles.historyText}>Inactive </Text>
-            </Pressable>
+            </Pressable> */}
         </View>
         </View>
   )
