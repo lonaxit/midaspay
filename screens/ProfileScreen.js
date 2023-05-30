@@ -15,7 +15,7 @@ import moment from 'moment';
 
 
 
-const ProfileScreen = () => {
+const ProfileScreen = ({navigation}) => {
   const { isProfile,profileInfo, getProfile, userInfo, fetchUser } = useMidasAuth()
   
   useEffect(() => {
@@ -27,7 +27,9 @@ const ProfileScreen = () => {
       getProfile(userInfo.id)
     }
     
-},[])
+  }, [])
+  
+
 
 if (!userInfo) {
   return (
@@ -53,12 +55,12 @@ if (!userInfo) {
         <Text style={styles.userName}>{ profileInfo.user?.last_name}, { profileInfo.user?.first_name} { profileInfo.user?.other_name}</Text>
         
         <View style={styles.userBtnWrapper}>
-           <TouchableOpacity style={styles.userBtn}>
-              <Text style={styles.userBtnText}>Message</Text>
+           <TouchableOpacity style={styles.userBtn} onPress={()=>navigation.navigate('changepassword')}>
+              <Text style={styles.userBtnText}>Update Password</Text>
            </TouchableOpacity>
-         <TouchableOpacity style={styles.userBtn}>
+         {/* <TouchableOpacity style={styles.userBtn}>
             <Text style={styles.userBtnText}>Follow</Text>
-         </TouchableOpacity>
+         </TouchableOpacity> */}
         </View>
 
         <View style={styles.userInfoWrapper}>
@@ -156,7 +158,7 @@ const styles = StyleSheet.create({
     // copied styles
     // alignItems: 'center',
     // justifyContent: 'center',
-    paddingTop:30,
+    paddingTop:70,
     paddingRight: 20,
     paddingLeft: 20,
     backgroundColor:'#fff'
@@ -240,7 +242,8 @@ const styles = StyleSheet.create({
   },
 
   userBtn: {
-    borderColor: '#2e64e5',
+    backgroundColor:'#C96D3C',
+    borderColor: '#C96D3C',
     borderWidth: 2,
     borderRadius: 3,
     paddingVertical: 8,
@@ -248,7 +251,8 @@ const styles = StyleSheet.create({
     marginHorizontal:5
   },
   userBtnText: {
-    color:'#2e64e5'
+    color: '#fff',
+    fontWeight:'bold'
   },
   userInfoWrapper: {
     flexDirection: 'row',
