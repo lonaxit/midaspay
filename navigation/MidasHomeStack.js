@@ -6,6 +6,7 @@ import SavingOverviewDetailScreen from '../screens/SavingOverviewDetailScreen';
 import ActiveLoanDetail from '../screens/ActiveLoanDetail';
 import InactiveLoanScreen from '../screens/InactiveLoanScreen';
 import MidasTabStack from './MidasTabStack';
+import ChangePassword from '../screens/ChangePassword';
 
 
 
@@ -33,14 +34,19 @@ const MidasHomeStack = () => {
       }}
       />
       <Stack.Screen component={SavingOverviewDetailScreen} name="usersavingdetail" options={{
-        title:'Saving Detail'
+        title:'Saving Details'
       }} />
       <Stack.Screen component={ActiveLoanDetail} name="activeloandetail" options={{
-        title:'Active Loan'
+        title:'Loan Details'
       }}/>
       <Stack.Screen component={InactiveLoanScreen} name="inactiveloans"
         options={{
         title:'Inactive Loans'
+        }} />
+      
+      <Stack.Screen component={ChangePassword} name="changepassword"
+        options={{
+        title:''
       }}/>
             
     </Stack.Navigator>
