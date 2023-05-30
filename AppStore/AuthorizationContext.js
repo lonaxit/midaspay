@@ -46,7 +46,6 @@ export const AuthorizationProvider = ({ children }) => {
         } catch (error) {
           setIsFetching(false)
           return { err: `Loan fetching error has occurred ${error}` };
-  
         }
         setIsFetching(false)
   }
