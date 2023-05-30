@@ -8,9 +8,9 @@ const OverviewWelcomeHeader = ({ onPress }) => {
 const {userInfo} = useMidasAuth()
   return (
 <View style={styles.welcomeHeader}>
-    <Text style={{fontWeight:'bold'}}>Hello {userInfo.last_name}</Text>
+    <Text style={{fontWeight:'bold',color:'#fff'}}>Hello {userInfo.last_name}</Text>
           <Pressable  onPress={onPress}>
-          <AntDesign name="lock1" size={24} color="black" />
+          <AntDesign name="lock1" size={24} color="#fff" />
     {/* <ImageBackground
     source={require('../assets/images/menu.png')}
     style={{ width: 35, height: 35 }}
