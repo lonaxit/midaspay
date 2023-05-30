@@ -2,9 +2,13 @@ import React from 'react'
 import { View, Text, StyleSheet,FlatList, ActivityIndicator } from 'react-native'
 import { useMidasAuth } from '../AppStore/AuthorizationContext'
 import Item from '../components/Item'
+import LoanSummary from '../components/LoanSummary'
+import SectionHeader from '../components/SectionHeader'
 
-const LoanHomeScreen = ({navigation}) => {
+const LoanHomeScreen = ({navigation, route}) => {
 
+
+  // const loanBalance = route.params.loanBalance
   const { userInfo } = useMidasAuth()
 
   function handleActiveLoanNavigation(id) {
@@ -17,23 +21,28 @@ const LoanHomeScreen = ({navigation}) => {
         <ActivityIndicator size={'large'} />
     </View>
     )
-}
+  }
+  
+  let activeLoans = userInfo.loanowner.filter(loan => loan.active === true)
 
+  const loanBalance = activeLoans.reduce((accumulator, record) => accumulator + record.  total_balance, 0);
 
+  const bottomTitle = 'Remaining on your loan ledger'
+  const topTitle = 'TOTAL LOAN BALANCE'
+  const leftText ='ACTIVE LOANS'
   return (
     <View style={styles.rootContainer}>
-      <View>
-        <Text style={styles.title}>All Loans</Text>
+      {/* <View>
+        <Text style={styles.title}>All Loans {loanBalance}</Text>
         <View>
             <Text style={styles.totalTitle}>{userInfo.loanowner.length}</Text>
         </View>
-
-       
-        
-      </View>
+      </View> */}
       
+      <LoanSummary amount={loanBalance} bottomTitle={bottomTitle} topTitle={topTitle}/> 
+      <SectionHeader leftText={leftText}/>
       <FlatList
-                 data={userInfo.loanowner}
+                 data={activeLoans}
                   renderItem={({ item }) => (
                       <Item
                           title={item.product_name}
@@ -55,7 +64,7 @@ export default LoanHomeScreen
 const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
-    paddingTop:30,
+    paddingTop:10,
     paddingRight: 20,
     paddingLeft: 20,
     backgroundColor: '#fff',
