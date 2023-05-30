@@ -26,7 +26,7 @@ const LoginScreen = () => {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#f9fbfc' }}>
-      <Spinner visible={ isAuthenticating } textContent={'Please Wait...'}/>
+      <Spinner visible={ isAuthenticating }/>
       <View style={{alignItems:'center', marginTop:50}}>
         <Image source={require('../assets/images/logo.png')} style={[styles.logo]} resizeMode='contain' />
       </View>
@@ -63,13 +63,13 @@ const LoginScreen = () => {
             value={password}
             onChangeText={text => setPassword(text)}
           />
-          <TouchableOpacity onPress={()=>{}}>
+          {/* <TouchableOpacity onPress={()=>{}}>
             <Text style={{color:'#af3015'}}>Change?</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
       </View>
         
         <TouchableOpacity onPress={authenticate} style={{
-            backgroundColor: '#af3015',
+            backgroundColor: '#C96D3C',
             padding: 20,
             borderRadius: 10,
             marginBottom: 30,
@@ -80,18 +80,20 @@ const LoginScreen = () => {
            <Text style={{color:'#fff', fontFamily:'nunito-bold',fontSize:18, textAlign:'center'}}>Login</Text>
         </TouchableOpacity>
 
-        <View>
+        {/* <View>
         <Text style={{textAlign:'center', borderBottomColor:'#ccc', borderBottomWidth:1, paddingBottom:7}}>New to MIDAS?</Text>
-        </View>
+        </View>  */}
 
-        <View style={{marginTop:15}}>
+        {/* <View style={{marginTop:15}}>
          <TouchableOpacity onPress={()=>navigation.navigate('newmembership')}>
           <Text style={{fontFamily:'nunito-mediumItalic', fontSize:14, color:'#363130',textAlign:'center'}}>Apply for membership</Text>
           </TouchableOpacity>
-        </View>
+        </View> */}
       </View>
         
     </SafeAreaView>
+
+    
 
     // <SafeAreaView>
     //       <View style={styles.container}>
