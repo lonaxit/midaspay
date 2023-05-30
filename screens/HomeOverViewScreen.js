@@ -6,19 +6,38 @@ import LoanSummary from '../components/LoanSummary'
 import SectionHeader from '../components/SectionHeader'
 import FlatListRenderItem from '../components/FlatListRenderItem'
 import { useMidasAuth } from '../AppStore/AuthorizationContext'
-
-
+import SavingDetailItem from '../components/SavingDetailItem'
 
 
 const HomeOverViewScreen = ({ navigation }) => {
   
-    const { logout,userInfo,fetchUser } = useMidasAuth()
+    const { logout, userInfo, fetchUser } = useMidasAuth()
+    
+    // 
+    const {savingInfo, savingList,isFetchingSaving} = useMidasAuth()
+    
+    
 
-
+    useEffect(() => {
+        savingList()
+    }, [])
 
     useEffect(() => {
         fetchUser()
-    },[])
+    }, [])
+    
+
+    if (isFetchingSaving) {
+        return (
+          <View style={{flex:1, justifyContent:'center',alignItems:'center'}}>
+            <ActivityIndicator size={'large'} />
+        </View>
+        )
+    }
+
+
+
+ 
 
 
     function handleActiveLoanNavigation(id) {
@@ -31,7 +50,8 @@ const HomeOverViewScreen = ({ navigation }) => {
 
     // const topTitle = 'The figure below is a snapshot of your total indebtedness to MIDAS Touch'
     const bottomTitle = 'Remaining on your loan ledger'
-
+    const leftText = 'Previous Deductions'
+    const title ='Loan Bal:'
     
     
     if (!userInfo.loanowner) {
@@ -52,17 +72,37 @@ const totalBalance = activeLoans.reduce((accumulator, record) => accumulator + r
 
         
 <SafeAreaView style={styles.rootContainer}>
-            
-{/* <OverviewWelcomeHeader onPress={logout} /> */}
-<OverviewWelcomeHeader onPress={logout} /> 
-        <SavingSummary totalsaving={userInfo.totalSaving} />
+            <View style={styles.upperSection}>
+                
+            <OverviewWelcomeHeader onPress={logout} /> 
+            <SavingSummary title={title} totalsaving={userInfo.totalSaving} loanBal={totalBalance} />
         
-<LoanSummary amount={totalBalance} bottomTitle={bottomTitle}/>
+            {/* <LoanSummary amount={totalBalance} bottomTitle={bottomTitle}/> */}
 
-<SectionHeader onPress={handleInactiveLoanNavigation}/>
+            {/* <SectionHeader onPress={handleInactiveLoanNavigation} leftText={leftText}/>         */}
+            <Text style={styles.descriptionText}>Previous Deductions</Text>
+            </View>        
+{/* <OverviewWelcomeHeader onPress={logout} /> */}
 
-       
-               <FlatList
+
+<FlatList
+            data={savingInfo.slice(0,4)}
+                      renderItem={({ item }) => (
+                        <SavingDetailItem
+                          credit={item.credit}
+                          description={item.narration}
+                          debit={item.debit}
+                              balance={item.balance}
+                              transaction_date={item.transaction_date}
+                      />
+                      )}
+                
+            keyExtractor={(item) => item.id.toString()}
+                // extraData={selectedLoan}
+            showsVerticalScrollIndicator={false}
+            />
+
+               {/* <FlatList
                  data={activeLoans}
                   renderItem={({ item }) => (
                       <FlatListRenderItem
@@ -75,7 +115,7 @@ const totalBalance = activeLoans.reduce((accumulator, record) => accumulator + r
                    )}
                    keyExtractor={(item) => item.id.toString()}
                    showsVerticalScrollIndicator={false}
-            />        
+            />         */}
   </SafeAreaView>
   
   )
@@ -84,6 +124,19 @@ const totalBalance = activeLoans.reduce((accumulator, record) => accumulator + r
 export default HomeOverViewScreen
 
 const styles = StyleSheet.create({
+
+    upperSection: {
+        backgroundColor: '#239b56',
+        padding: 10,
+        marginBottom: 10,
+        borderRadius:10
+    },
+    descriptionText: {
+        color: '#fff',
+        fontSize: 14,
+        marginTop: 18,
+        marginBottom:12
+      },
 
     rootContainer: {
         flex: 1,
