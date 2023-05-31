@@ -46,7 +46,7 @@ const LoanSummary = ({ amount, topTitle, bottomTitle }) => {
           <Text style={styles.lightText}>Inactive</Text>
         </View>
         <View style={styles.analysisContainer}>
-          <Text>{activeLoans.length}</Text>
+          <Text style={{color:'#fff', fontSize:18}}>{activeLoans.length}</Text>
           <TouchableOpacity style={styles.welcomeBtn} onPress={()=>nav.navigate('inactiveloans')}>
             {/* <Text style={styles.welcomeBtnText}>Let's Begin</Text> */}
             <Text style={styles.inactiveText}>{inactiveLoans.length}</Text>
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
        
       },
       balanceText: {
-        color: 'black',
+        color: '#fff',
         fontSize: 32,
         fontWeight: 'bold',
         textAlign: 'center',
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     fontSize:14,
     fontWeight: 'bold',
     textAlign: 'center',
-    color: '#00221f',
+    color: '#fff',
   },
     lightText: {
           fontSize:14,
