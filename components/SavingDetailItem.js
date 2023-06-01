@@ -56,9 +56,9 @@ const styles = StyleSheet.create({
 
     },
     dateText: {
-        fontWeight: 'bold',
-        color: '#FF5733',
-        fontSize: 10,
-        fontFamily: 'nunito-medium'
+        // fontWeight: 'bold',
+        color: '#000',
+        fontSize: 11,
+        fontFamily: 'nunito-mediumItalic'
     }
 })
