@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "midaspay",
+    "name": "MIDAS Wallet",
     "slug": "midaspay",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -15,19 +15,28 @@
       "**/*"
     ],
     "ios": {
+      "buildNumber": "1.0.0",
       "supportsTablet": true,
       "config": {
         "usesNonExemptEncryption": false
-      }
+      },
+      "bundleIdentifier": "com.midastouchonline.midaswallet"
     },
     "android": {
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.midastouchonline.midaswallet"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "59923821-548b-411b-acd5-8fc6a920a28c"
+      }
     }
   }
 }
