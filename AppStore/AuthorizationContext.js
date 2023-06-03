@@ -2,7 +2,7 @@ import React, { createContext, useContext, useEffect, useState } from 'react'
 import * as SecureStore from 'expo-secure-store'
 import { BASE_URL_APP, BASE_URL_AUTH } from "../config";
 import axios from 'axios'
-
+import {Alert } from 'react-native'
 
 // create a context
 export const MIDASContext = createContext()
@@ -26,6 +26,8 @@ export const AuthorizationProvider = ({ children }) => {
   
   const [isProfile, setIsProfile] = useState(false)
   const [profileInfo, setProfileInfo] = useState([])
+  const [isLoadingLoans, setIsLoadingLoans] = useState(false)
+  const [guarantorLoans,setGuarantorLoans]= useState([])
    
     // fetch userinfo
     const fetchUser = async () => {
@@ -37,7 +39,7 @@ export const AuthorizationProvider = ({ children }) => {
         }
     };
 
-    // 
+    // Fetch detail of loan
     const detailLoan = async (id) => {
         setIsFetching(true)
         try {
@@ -49,6 +51,19 @@ export const AuthorizationProvider = ({ children }) => {
         }
         setIsFetching(false)
   }
+  
+  const fetchLoansByGuarantor = async (id) => {
+    setIsLoadingLoans(true)
+        try {
+          const res = await axios.get(`${BASE_URL_APP}/loans/guarantor/${id}/`)
+          setGuarantorLoans(res.data)
+        } catch (error) {
+          setIsLoadingLoans(false)
+          Alert.alert('Error', 'Something Went Wrong');
+        }
+        setIsLoadingLoans(false)
+}
+     
   
   // saving detail
   const savingList = async () => {
@@ -144,7 +159,7 @@ export const AuthorizationProvider = ({ children }) => {
     
     
 
-    const value ={ login, logout,fetchUser, detailLoan,savingList,getProfile,loanInfo,savingInfo, isFetching,authenticated,token,userInfo,isAuthenticating,isFetchingSaving,isProfile,profileInfo }
+    const value ={ login, logout,fetchUser, detailLoan,savingList,getProfile,fetchLoansByGuarantor,loanInfo,savingInfo, isFetching,authenticated,token,userInfo,isAuthenticating,isFetchingSaving,isProfile,profileInfo,isLoadingLoans,guarantorLoans }
     
   return (
         <MIDASContext.Provider value={value}>
