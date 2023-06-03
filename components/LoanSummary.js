@@ -22,13 +22,13 @@ const LoanSummary = ({ amount, topTitle, bottomTitle }) => {
   return (
     <Pressable >
     <LinearGradient
-      colors={['#C96D3C', '#C96D3C']}
+      colors={['#C96D3C', '#C96D']}
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
       style={styles.loanContainer}
       >
             
-            <View>
+        <View>
               <Text style={styles.boldText}>{topTitle}</Text>
         </View>
         
