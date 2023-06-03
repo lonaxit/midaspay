@@ -2,7 +2,8 @@ import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
 import moment from 'moment';
 
-const SavingDetailItem = ({description,credit,debit,balance,transaction_date}) => {
+const SavingDetailItem = ({ description, credit, debit, balance, transaction_date }) => {
+  
   return (
 
                     <View style={styles.loanItemContainer}>
