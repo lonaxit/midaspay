@@ -5,6 +5,8 @@ import { BASE_URL_AUTH } from '../config';
 import axios from 'axios'
 import { useMidasAuth } from '../AppStore/AuthorizationContext';
 import Spinner from 'react-native-loading-spinner-overlay';
+
+
 const ChangePassword = ({navigation}) => {
 
     const [password, setPassword] = useState('');
