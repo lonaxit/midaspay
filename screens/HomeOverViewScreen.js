@@ -57,7 +57,7 @@ const HomeOverViewScreen = ({ navigation }) => {
     if (!userInfo.loanowner) {
         return (
           <View style={{flex:1, justifyContent:'center',alignItems:'center'}}>
-            <ActivityIndicator size={'large'} />
+            <ActivityIndicator size='large' color='#C96D3C' />
         </View>
         )
     }
