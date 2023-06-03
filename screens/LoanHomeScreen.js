@@ -12,7 +12,7 @@ const LoanHomeScreen = ({navigation, route}) => {
   const { userInfo } = useMidasAuth()
 
   function handleActiveLoanNavigation(id) {
-    navigation.navigate('activeloandetail',{loanId:id})
+    navigation.navigate('loandetail',{loanId:id})
 }
 
   if (!userInfo.loanowner) {
