@@ -10,6 +10,7 @@ const GuarantorScreen = ({navigation,route}) => {
 
     const { userInfo,isLoadingLoans,guarantorLoans,fetchLoansByGuarantor } = useMidasAuth()
     const data = route.params.data
+    const description = route.params.description
 
   
 
@@ -32,7 +33,7 @@ const GuarantorScreen = ({navigation,route}) => {
         <SafeAreaView style={styles.rootContainer}>
        <Spinner visible={ isLoadingLoans }/>
         <View style={styles.container}>
-                <Text style={{ color: '#99a3a4', fontSize: 16, marginBottom:10, fontWeight:'bold' }}>First Guarantor Liability</Text>
+                <Text style={{ color: '#99a3a4', fontSize: 16, marginBottom:10, fontWeight:'bold' }}>{description}</Text>
                 <Text style={{fontSize:32,color:'#ca070a', fontFamily:'nunito-bold'}}>₦{parseFloat(liability).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</Text>
        
             </View> 
