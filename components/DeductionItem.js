@@ -1,7 +1,7 @@
 import { View, Text, Pressable, StyleSheet } from 'react-native'
 import React from 'react'
 import globalStyles from '../style/global.style'
-
+import { EvilIcons } from '@expo/vector-icons';
 const DeductionItem = ({description,credit,debit,balance}) => {
   return (
 
