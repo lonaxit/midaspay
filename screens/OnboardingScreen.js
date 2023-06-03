@@ -20,11 +20,11 @@ const OnboardingScreen = ({navigation}) => {
       <View style={styles.welcomeImageWrapper}>
         <View>
         <Text style={{ color: 'black', fontSize: 24, fontFamily:'nunito-bold', fontWeight:'bold'}}>
-          Realize your potential everywhere...
+          Let's build something <Text style={{fontSize:26,color:'#C96D3C'}}>new</Text> together
           </Text>
           
           <Text style={{marginTop:10,fontFamily:'nunito-mediumItalic'}}>
-            Let's help you build a new future!
+            Step into the future that's driven by passion and creativity
           </Text>
         </View>
        

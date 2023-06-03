@@ -11,9 +11,7 @@ const GuarantorScreen = ({navigation,route}) => {
     const { userInfo,isLoadingLoans,guarantorLoans,fetchLoansByGuarantor } = useMidasAuth()
     const data = route.params.data
 
-    function handleActiveLoanNavigation(id) {
-        navigation.navigate('loandetail',{loanId:id})
-    }
+  
 
     if (!data) {
         return (
@@ -27,7 +25,7 @@ const GuarantorScreen = ({navigation,route}) => {
     const liability = data.reduce((accumulator, record) => accumulator + record.total_balance, 0);
     
     function handleActiveLoanNavigation(id) {
-        navigation.navigate('activeloandetail',{loanId:id})
+        navigation.navigate('loandetail',{loanId:id})
     }
     
     return (
@@ -50,6 +48,7 @@ const GuarantorScreen = ({navigation,route}) => {
                         loan_date={item.start_date}
                         deduction={item.monthly_deduction}
                         totalamount={item.approved_amount}
+                        balance={item.total_balance}
                         onPress={()=>handleActiveLoanNavigation(item.id)}
                     />  
                  )}

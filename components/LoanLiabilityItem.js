@@ -3,7 +3,7 @@ import React from 'react'
 import moment from 'moment'
 
 
-const LoanLiabilityItem = ({onPress,title,description,deduction,totalamount,loan_date}) => {
+const LoanLiabilityItem = ({onPress,balance,title,description,deduction,totalamount,loan_date}) => {
   
     return (
     <TouchableOpacity onPress={onPress}>
@@ -11,6 +11,8 @@ const LoanLiabilityItem = ({onPress,title,description,deduction,totalamount,loan
     <View style={{padding:4}}>
         <Text style={{ fontWeight: 'bold', color: 'black' ,fontSize:14, fontFamily:'nunito-medium' }}>{title}</Text>
         <Text style={{ color: 'black', fontSize:11 }}> ₦{parseFloat(deduction).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}
+                    </Text>
+        <Text style={{ color: 'black', fontSize:12,marginTop:8 }}> ₦{parseFloat(balance).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}
       </Text>
     <Text style={styles.dateText}>
      {moment(loan_date).format('MMMM Do YYYY')}
