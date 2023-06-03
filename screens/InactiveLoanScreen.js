@@ -53,7 +53,7 @@ const InactiveLoanScreen = ({ route, navigation }) => {
                  )}
                  keyExtractor={(item) => item.id.toString()}
                  showsVerticalScrollIndicator={false}
-          />        
+      />        
   </View>
   )
 }
