@@ -40,7 +40,7 @@ const LoanLiabilityScreen = ({navigation}) => {
         </View> 
 
             
-        <TouchableOpacity style={styles.container} onPress={() => navigation.navigate('guarantorscreen', { data:  guarantor_one_loans})}>
+        <TouchableOpacity style={styles.container} onPress={() => navigation.navigate('guarantorscreen', { data:  guarantor_one_loans,description:'First Guarantee Liability'})}>
                 <Text>First Guarantees</Text>
         <View >
         <Text style={styles.guaranteeCount}>{guarantor_one_loans.length}</Text>
@@ -59,7 +59,7 @@ const LoanLiabilityScreen = ({navigation}) => {
         } 
         </View> */}
 
-            <TouchableOpacity style={styles.container} onPress={() => navigation.navigate('guarantorscreen', { data: guarantor_two_loans })}>
+            <TouchableOpacity style={styles.container} onPress={() => navigation.navigate('guarantorscreen', { data: guarantor_two_loans,description:'Second Guarantee Liability' })}>
             <Text>Second Guarantees</Text>
     <View >
      <Text style={styles.guaranteeCount}>{guarantor_two_loans.length}</Text>
