@@ -11,7 +11,7 @@ import LoanDetailSummaryCard from '../components/LoanDetailSummaryCard'
 import SectionHeader from '../components/SectionHeader'
 
 const ActiveLoanDetail = ({route,navigation}) => {
-  const [test, setTest] = useState(14414)
+
 
 const { isFetching, detailLoan, loanInfo} = useMidasAuth()
   const topTitle = 'Remaining Balance'
