@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native'
 
 
 const SavingSummary = ({ title,totalsaving, loanBal }) => {
-  
+  const noValue = 0
   const nav =  useNavigation()
 const [balance,setBalance] = useState(142587)
 
@@ -36,10 +36,11 @@ const [balance,setBalance] = useState(142587)
 
       <View style={styles.loanBalContainer}>
         <Text style={styles.loanBalText}>{title} </Text>
-        { loanBal &&    <Pressable  onPress={() => nav.navigate('Loans')}>
+        {loanBal ? (
+          <Pressable onPress={() => nav.navigate('Loans')}>
         <Text style={styles.loanBal}>₦{parseFloat(loanBal).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</Text>
         </Pressable>
-        } 
+        ):  <Text style={styles.loanBal}>₦{parseFloat(noValue).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</Text> } 
         </View>
 
     </View>
