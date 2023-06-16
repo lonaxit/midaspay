@@ -66,7 +66,10 @@ let activeLoans = userInfo.loanowner.filter(loan => loan.active === true)
 
     // sum total loan balance
     
-const totalBalance = activeLoans.reduce((accumulator, record) => accumulator + record.  total_balance, 0);
+    let totalBalance = activeLoans.reduce((accumulator, record) => accumulator + record.total_balance, 0);
+    
+    
+    
 
     return (
 
