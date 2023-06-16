@@ -9,7 +9,7 @@ const InactiveLoanScreen = ({ route, navigation }) => {
   const { userInfo } = useMidasAuth()
 
   function handleActiveLoanNavigation(id) {
-    navigation.navigate('activeloandetail',{loanId:id})
+    navigation.navigate('loandetail',{loanId:id})
 }
 
   // const navigation = useNavigation()
