@@ -24,7 +24,7 @@ const OnboardingScreen = ({navigation}) => {
           </Text>
           
           <Text style={{marginTop:10,fontFamily:'nunito-mediumItalic'}}>
-            Step into the future that's driven by passion and creativity
+            and leap into the future that's driven by technology, passion and creativity
           </Text>
         </View>
        
